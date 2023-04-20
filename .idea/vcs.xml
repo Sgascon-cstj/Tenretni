@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Android/Android" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/DevWeb/DevWeb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/SiteWeb/TP2151866" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/WPF/ProgrammationInterfaceGraphiqueCours" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/WPF/TP1_WPF" vcs="Git" />
+  </component>
+</project>
