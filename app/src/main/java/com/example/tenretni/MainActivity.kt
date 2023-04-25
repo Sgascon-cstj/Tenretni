@@ -1,5 +1,7 @@
 package com.example.tenretni
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -31,5 +33,11 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    companion object {
+        fun newIntent(context: Context) : Intent {
+            return Intent(context, MainActivity::class.java)
+        }
     }
 }

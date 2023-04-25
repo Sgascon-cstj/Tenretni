@@ -3,4 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="loading_message">Loading %d/10 ...</string>
+    <string name="concepteur"><![CDATA[Issam Abdelkrim & Samuel Gascon]]></string>
+    <string name="tenretni_2023">Tenretni - 2023</string>
 </resources>
