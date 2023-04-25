@@ -18,6 +18,9 @@ class LoadingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loading)
 
+        // Commencer le décompte
+        viewModel.startTimer()
+
         viewModel.loadingUiState.onEach {
             when(it){
                 LoadingUiState.Empty -> Unit
@@ -25,7 +28,6 @@ class LoadingActivity : AppCompatActivity() {
                     startActivity(MainActivity.newIntent(this))
                 }
                 is LoadingUiState.Loading -> {
-                    viewModel.startTimer()
                     binding.txvLoading.text = getString(R.string.loading_message, it.progression)
                     binding.pgbLoading.setProgress(it.progression, true)
                 }
