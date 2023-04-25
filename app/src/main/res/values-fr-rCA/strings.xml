@@ -4,4 +4,8 @@
     <string name="loading_message">Chargement %d/10 ...</string>
     <string name="concepteur"><![CDATA[Issam Abdelkrim & Samuel Gascon]]></string>
     <string name="tenretni_2023">Tenretni - 2023</string>
+    <string name="date_itemTicket">%s</string>
+    <string name="priority_normal_IT">Normale</string>
+    <string name="status_open_IT">Ouvert</string>
+    <string name="ticket_number_IT">Billet %s</string>
 </resources>
