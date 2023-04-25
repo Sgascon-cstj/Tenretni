@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tenretni</string>
+    <string name="loading_message">Chargement %d/10 ...</string>
+    <string name="concepteur"><![CDATA[Issam Abdelkrim & Samuel Gascon]]></string>
+    <string name="tenretni_2023">Tenretni - 2023</string>
+</resources>
