@@ -8,4 +8,7 @@
     <string name="networks">Networks</string>
     <string name="online">Online</string>
     <string name="n_a">N/A</string>
+    <string name="loading_message">Loading %d/10 ...</string>
+    <string name="concepteur"><![CDATA[Issam Abdelkrim & Samuel Gascon]]></string>
+    <string name="tenretni_2023">Tenretni - 2023</string>
 </resources>
