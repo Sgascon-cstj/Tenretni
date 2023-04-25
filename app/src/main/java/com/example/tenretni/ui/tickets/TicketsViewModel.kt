@@ -10,4 +10,6 @@ class TicketsViewModel : ViewModel() {
         value = "This is home Fragment"
     }
     val text: LiveData<String> = _text
+
+    // TODO: Il va falloir parler au repo est creer retrieveAll
 }
