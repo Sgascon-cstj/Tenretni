@@ -6,4 +6,6 @@
     <string name="tickets">Tickets</string>
     <string name="Gateways">Gateways</string>
     <string name="networks">Networks</string>
+    <string name="online">Online</string>
+    <string name="n_a">N/A</string>
 </resources>
