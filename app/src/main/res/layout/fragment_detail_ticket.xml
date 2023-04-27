@@ -6,7 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.tickets.details.DetailTicketFragment">
-
+    <androidx.core.widget.ContentLoadingProgressBar android:id="@+id/pgbLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="?android:attr/progressBarStyleLarge"
+        android:indeterminateTint="@android:color/black" />
     <include
         android:id="@+id/ticket"
         layout="@layout/item_tickets"

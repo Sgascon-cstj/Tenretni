@@ -18,6 +18,8 @@ import com.example.tenretni.core.ColorHelper
 import com.example.tenretni.core.Constants
 import com.example.tenretni.core.DateHelper
 import com.example.tenretni.databinding.FragmentDetailTicketBinding
+import com.example.tenretni.domain.models.Customer
+import com.example.tenretni.domain.models.Ticket
 import com.example.tenretni.ui.gateways.adapter.GatewayRecyclerViewAdapter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -48,32 +50,51 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
                 is DetailTicketUiState.GatewaysSuccess -> {
                     gatewayRecyclerViewAdapter.gateways = it.gateways
                     gatewayRecyclerViewAdapter.notifyDataSetChanged()
+                    hideAimationLoading()
                 }
                 DetailTicketUiState.Empty -> Unit
                 is DetailTicketUiState.Error -> Toast.makeText(requireContext(),getString(R.string.apiErrorMessage), Toast.LENGTH_SHORT).show()
                 is DetailTicketUiState.TicketSuccess -> {
-                    binding.ticket.txvTicketNumberIT.text = binding.root.context.getString(R.string.ticket_number_IT,it.ticket.ticketNumber)
-                    binding.ticket.txvDateTicketIT.text = DateHelper.formatISODate(it.ticket.createdDate)
-                    binding.ticket.chipPriorityIT.text = it.ticket.priority
-                    binding.ticket.chipStatusIT.text = it.ticket.status
-                    binding.ticket.chipPriorityIT.chipBackgroundColor = ColorHelper.ticketPriorityColor(binding.root.context, it.ticket.priority)
-                    //Customer
-                    binding.txvName.text = getString(R.string.first_name_and_last_name, it.ticket.customer.firstName, it.ticket.customer.lastName)
-                    binding.txvAdresse.text = it.ticket.customer.address
-                    binding.txvVille.text = it.ticket.customer.city
-
-                    Glide.with(requireContext())
-                        .load(Constants.FLAG_API_URL.format(it.ticket.customer.country.lowercase())).into(binding.imvCountry)
-
-
+                    displayTicket(it.ticket)
+                    displayCustomer(it.ticket.customer)
+                    hideAimationLoading()
                 }
 
-                DetailTicketUiState.Loading -> Unit
+                DetailTicketUiState.Loading -> {
+                    startAnimationLoading()
+                }
             }
 
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
-
+    private fun startAnimationLoading(){
+        binding.ticket.root.visibility = View.INVISIBLE
+        binding.cardView.visibility = View.INVISIBLE
+        binding.btnInstall.visibility = View.INVISIBLE
+        binding.btnSolve.visibility = View.INVISIBLE
+        binding.pgbLoading.show()
+    }
+    private fun hideAimationLoading(){
+        binding.ticket.root.visibility = View.VISIBLE
+        binding.cardView.visibility = View.VISIBLE
+        binding.btnInstall.visibility = View.VISIBLE
+        binding.btnSolve.visibility = View.VISIBLE
+        binding.pgbLoading.hide()
+    }
+    private fun displayTicket(ticket: Ticket){
+        binding.ticket.txvTicketNumberIT.text = binding.root.context.getString(R.string.ticket_number_IT,ticket.ticketNumber)
+        binding.ticket.txvDateTicketIT.text = DateHelper.formatISODate(ticket.createdDate)
+        binding.ticket.chipPriorityIT.text = ticket.priority
+        binding.ticket.chipStatusIT.text = ticket.status
+        binding.ticket.chipPriorityIT.chipBackgroundColor = ColorHelper.ticketPriorityColor(binding.root.context, ticket.priority)
+    }
+    private fun displayCustomer(customer: Customer){
+        binding.txvName.text = getString(R.string.first_name_and_last_name, customer.firstName, customer.lastName)
+        binding.txvAdresse.text = customer.address
+        binding.txvVille.text = customer.city
+        Glide.with(requireContext())
+            .load(Constants.FLAG_API_URL.format(customer.country.lowercase())).into(binding.imvCountry)
+    }
 
 
 }
