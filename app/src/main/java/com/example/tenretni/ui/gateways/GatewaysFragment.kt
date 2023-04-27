@@ -35,18 +35,20 @@ class GatewaysFragment : Fragment(R.layout.fragment_gateways) {
         binding.rcvGateways.adapter = gatewayRecyclerViewAdapter
 
 
-        //TODO: Ajouter le loading
-        //TODO: Ajouter le message d'erreur
+
         viewModel.gatewaysUiState.onEach {
             when(it){
                 GatewaysUiState.Empty -> Unit
-                is GatewaysUiState.Error -> Toast.makeText(requireContext(),it.ex.toString(),Toast.LENGTH_LONG).show()
-                GatewaysUiState.Loading -> Unit
+                is GatewaysUiState.Error -> Toast.makeText(requireContext(),getString(R.string.apiErrorMessage),Toast.LENGTH_LONG).show()
+                GatewaysUiState.Loading -> {
+                    binding.pgbLoading.show()
+                    binding.rcvGateways.visibility = View.INVISIBLE
+                }
                 is GatewaysUiState.Success -> {
                     binding.rcvGateways.visibility = View.VISIBLE
                     gatewayRecyclerViewAdapter.gateways = it.gateways
                     gatewayRecyclerViewAdapter.notifyDataSetChanged()
-
+                    binding.pgbLoading.hide()
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
