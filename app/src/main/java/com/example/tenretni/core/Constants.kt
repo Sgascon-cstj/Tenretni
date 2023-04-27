@@ -16,6 +16,7 @@ object Constants {
     const val COLUMNS_GATEWAYS = 2
     object RefreshDelay{
         const val GATEWAY_LIST = 60 * 1000L
+        const val TICKETS_LIST = 30 * 1000L
     }
     enum class TicketPriority {
         Low, Normal, High, Critical
