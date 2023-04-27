@@ -29,13 +29,10 @@
     <fragment
         android:id="@+id/detailTicketFragment"
         android:name="com.example.tenretni.ui.tickets.details.DetailTicketFragment"
-        android:label="fragment_detail_ticket"
-        tools:layout="@layout/fragment_detail_ticket" >
+        android:label="@string/title_fragmentDetail"
+        tools:layout="@layout/fragment_detail_ticket">
         <argument
             android:name="href"
             app:argType="string" />
-        <action
-            android:id="@+id/action_detailTicketFragment_to_navigation_tickets"
-            app:destination="@id/navigation_tickets" />
     </fragment>
 </navigation>

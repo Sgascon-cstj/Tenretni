@@ -24,4 +24,5 @@
     <string name="solve">SOLVE</string>
     <string name="install">INSTALL</string>
     <string name="title_fragmentDetail">Ticket %s</string>
+    <string name="first_name_and_last_name" translatable="false">%s %s</string>
 </resources>
