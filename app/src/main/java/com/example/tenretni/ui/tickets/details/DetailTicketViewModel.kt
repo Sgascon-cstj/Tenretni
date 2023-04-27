@@ -30,6 +30,7 @@ class DetailTicketViewModel(private val href: String): ViewModel() {
                         is ApiResult.Error -> DetailTicketUiState.Error(apiResult.exception)
                         ApiResult.Loading -> DetailTicketUiState.Loading
                         is ApiResult.Success -> {
+                            retrieveGateways(apiResult.data)
                             DetailTicketUiState.TicketSuccess(apiResult.data)
                         }
                     }
@@ -38,7 +39,19 @@ class DetailTicketViewModel(private val href: String): ViewModel() {
         }
     }
 
-
+    fun retrieveGateways(ticket: Ticket){
+        viewModelScope.launch {
+            customerRepository.retrieveGateways(ticket.customer.href)?.collect{apiResult->
+                _detailTicketUiState.update {
+                    when(apiResult){
+                        is ApiResult.Error -> DetailTicketUiState.Error(apiResult.exception)
+                        ApiResult.Loading -> DetailTicketUiState.Loading
+                        is ApiResult.Success -> DetailTicketUiState.GatewaysSuccess(apiResult.data)
+                    }
+                }
+            }
+        }
+    }
     class Factory(private val href: String) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return modelClass.getConstructor(String::class.java).newInstance(href)

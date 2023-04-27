@@ -45,7 +45,10 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
 
         viewModel.detailTicketUiState.onEach {
             when(it){
-                is DetailTicketUiState.CustumerSuccess -> Unit
+                is DetailTicketUiState.GatewaysSuccess -> {
+                    gatewayRecyclerViewAdapter.gateways = it.gateways
+                    gatewayRecyclerViewAdapter.notifyDataSetChanged()
+                }
                 DetailTicketUiState.Empty -> Unit
                 is DetailTicketUiState.Error -> Toast.makeText(requireContext(),getString(R.string.apiErrorMessage), Toast.LENGTH_SHORT).show()
                 is DetailTicketUiState.TicketSuccess -> {
@@ -62,8 +65,6 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
                     Glide.with(requireContext())
                         .load(Constants.FLAG_API_URL.format(it.ticket.customer.country.lowercase())).into(binding.imvCountry)
 
-
-                    //Modifier le recyclerView
 
                 }
 

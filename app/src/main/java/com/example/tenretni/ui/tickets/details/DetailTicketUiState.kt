@@ -1,6 +1,7 @@
 package com.example.tenretni.ui.tickets.details
 
 import com.example.tenretni.domain.models.Customer
+import com.example.tenretni.domain.models.Gateway
 import com.example.tenretni.domain.models.Ticket
 
 sealed class DetailTicketUiState {
@@ -8,5 +9,5 @@ sealed class DetailTicketUiState {
     object Loading: DetailTicketUiState()
     class Error(val e: Exception) : DetailTicketUiState()
     class TicketSuccess(val ticket: Ticket) : DetailTicketUiState()
-    class CustumerSuccess(val customer: Customer) : DetailTicketUiState()
+    class GatewaysSuccess(val gateways: List<Gateway>) : DetailTicketUiState()
 }
