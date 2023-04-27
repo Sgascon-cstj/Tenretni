@@ -31,12 +31,17 @@ class TicketRepository {
 
     fun retrieveOne(href: String): Flow<ApiResult<Ticket>>? {
         return flow {
-            emit(ApiResult.Loading)
-            try{
-                emit(ApiResult.Success(ticketDataSource.retrieveOne(href)))
-            } catch(ex: java.lang.Exception) {
-                emit(ApiResult.Error(ex))
-            }
+            while (true)
+            {
+                emit(ApiResult.Loading)
+                try{
+                    emit(ApiResult.Success(ticketDataSource.retrieveOne(href)))
+                } catch(ex: Exception) {
+                    emit(ApiResult.Error(ex))
+                }
+
+            delay(Constants.RefreshDelay.TICKETS_LIST)
+        }
         }.flowOn(Dispatchers.IO)
     }
 }
