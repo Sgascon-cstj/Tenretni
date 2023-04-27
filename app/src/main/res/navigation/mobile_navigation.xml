@@ -9,7 +9,11 @@
         android:id="@+id/navigation_tickets"
         android:name="com.example.tenretni.ui.tickets.TicketsFragment"
         android:label="@string/tickets"
-        tools:layout="@layout/fragment_tickets" />
+        tools:layout="@layout/fragment_tickets" >
+        <action
+            android:id="@+id/action_navigation_tickets_to_detailTicketFragment"
+            app:destination="@id/detailTicketFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/gatewaysFragment"
@@ -26,6 +30,15 @@
         android:name="com.example.tenretni.ui.networks.NetworksFragment"
         android:label="@string/networks"
         tools:layout="@layout/fragment_networks" />
+    <fragment
+        android:id="@+id/detailTicketFragment"
+        android:name="com.example.tenretni.ui.tickets.details.DetailTicketFragment"
+        android:label="@string/title_fragmentDetail"
+        tools:layout="@layout/fragment_detail_ticket">
+        <argument
+            android:name="href"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/detailGatewayFragment"
         android:name="com.example.tenretni.ui.gateways.details.DetailGatewayFragment"

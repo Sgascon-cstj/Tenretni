@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tenretni.R
@@ -25,7 +26,7 @@ class TicketsFragment : Fragment(R.layout.fragment_tickets) {
     private val binding: FragmentTicketsBinding by viewBinding()
     private val viewModel: TicketsViewModel by activityViewModels()
 
-    private val ticketRecyclerViewAdapter = TicketRecyclerViewAdapter(listOf()) // Mettre le ::onClickTicket
+    private val ticketRecyclerViewAdapter = TicketRecyclerViewAdapter(listOf(), ::onTicketClick)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -58,10 +59,10 @@ class TicketsFragment : Fragment(R.layout.fragment_tickets) {
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    //private fun onTicketClick(ticket: Ticket) {
+    private fun onTicketClick(ticket: Ticket) {
     //TODO: Tâche 9
-    //val action = AtlasFragmentDirections.actionAtlasFragmentToMonsterFragment(ticket.href)
-       // findNavController().navigate(action)
-    //}
+    val action = TicketsFragmentDirections.actionNavigationTicketsToDetailTicketFragment(ticket.href)
+        findNavController().navigate(action)
+    }
 
 }

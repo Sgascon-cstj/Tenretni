@@ -18,7 +18,12 @@
     <string name="apiErrorMessage">Error while retrieving the data from the server.</string>
     <string name="nanoSeconde" translatable="false">%d ns</string>
     <string name="ebps" translatable="false">%.3f Ebps</string>
+    <string name="gateway">Gateways</string>
     <string name="btn_reboot">REBOOT</string>
     <string name="kernel_revision">Kernel revision %s</string>
     <string name="version" translatable="false">Version %s</string>
+    <string name="solve">SOLVE</string>
+    <string name="install">INSTALL</string>
+    <string name="title_fragmentDetail">Ticket %s</string>
+    <string name="first_name_and_last_name" translatable="false">%s %s</string>
 </resources>
