@@ -91,11 +91,11 @@
             android:layout_height="wrap_content"
             android:visibility="invisible"
             android:id="@+id/offline"
-            app:constraint_referenced_ids="chipInvisible, txvNA"/>
+            app:constraint_referenced_ids="chipStatusIT, txvNA"/>
 
         <com.google.android.material.chip.Chip
             android:visibility="visible"
-            android:id="@+id/chipInvisible"
+            android:id="@+id/chipStatusIT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/online"

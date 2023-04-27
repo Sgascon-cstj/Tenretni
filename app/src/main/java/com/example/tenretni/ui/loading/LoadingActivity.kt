@@ -34,7 +34,4 @@ class LoadingActivity : AppCompatActivity() {
             }
         }.launchIn(lifecycleScope)
     }
-
-
-
 }
