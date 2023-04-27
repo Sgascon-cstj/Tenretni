@@ -8,4 +8,5 @@
     <string name="priority_normal_IT">Normale</string>
     <string name="status_open_IT">Ouvert</string>
     <string name="ticket_number_IT">Billet %s</string>
+    <string name="apiErrorMessage">Erreur lors de la récupération des données à partir du serveur.</string>
 </resources>
