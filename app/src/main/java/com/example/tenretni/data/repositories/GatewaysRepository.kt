@@ -18,8 +18,9 @@ class GatewaysRepository {
     fun retriveAll(): Flow<ApiResult<List<Gateway>>>{
         return flow<ApiResult<List<Gateway>>> {
             while(true) {
+                emit(ApiResult.Loading)
                 try {
-                    emit(ApiResult.Loading)
+
                     emit(ApiResult.Success(gatewaysDataSource.retrieveAll()))
                 }catch (e: Exception){
                     emit(ApiResult.Error(e))
