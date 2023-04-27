@@ -11,10 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.tenretni.R
 import com.example.tenretni.core.Constants
 import com.example.tenretni.databinding.FragmentGatewaysBinding
+import com.example.tenretni.domain.models.Gateway
 import com.example.tenretni.ui.gateways.adapter.GatewayRecyclerViewAdapter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -24,11 +26,11 @@ class GatewaysFragment : Fragment(R.layout.fragment_gateways) {
     private val binding : FragmentGatewaysBinding by viewBinding()
     private val viewModel: GatewaysViewModel by viewModels()
 
-    private lateinit var gatewayRecyclerViewAdapter: GatewayRecyclerViewAdapter
+    private val gatewayRecyclerViewAdapter = GatewayRecyclerViewAdapter(listOf(), ::onGatewayClick)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        gatewayRecyclerViewAdapter = GatewayRecyclerViewAdapter()
+        //gatewayRecyclerViewAdapter = GatewayRecyclerViewAdapter()
 
         val gridLayoutManager = GridLayoutManager(requireContext(), Constants.COLUMNS_GATEWAYS)
         binding.rcvGateways.layoutManager = gridLayoutManager
@@ -52,5 +54,10 @@ class GatewaysFragment : Fragment(R.layout.fragment_gateways) {
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun onGatewayClick(gateway: Gateway) {
+    val action = GatewaysFragmentDirections.actionNavigationGatewaysToDetailGatewayFragment(gateway.href)
+     findNavController().navigate(action)
     }
 }

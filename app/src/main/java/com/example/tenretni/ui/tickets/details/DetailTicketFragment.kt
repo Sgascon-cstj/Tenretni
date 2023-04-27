@@ -9,6 +9,7 @@ import android.viewbinding.library.fragment.viewBinding
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
@@ -19,7 +20,9 @@ import com.example.tenretni.core.Constants
 import com.example.tenretni.core.DateHelper
 import com.example.tenretni.databinding.FragmentDetailTicketBinding
 import com.example.tenretni.domain.models.Customer
+import com.example.tenretni.domain.models.Gateway
 import com.example.tenretni.domain.models.Ticket
+import com.example.tenretni.ui.gateways.GatewaysFragmentDirections
 import com.example.tenretni.ui.gateways.adapter.GatewayRecyclerViewAdapter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -39,7 +42,7 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        gatewayRecyclerViewAdapter = GatewayRecyclerViewAdapter()
+        gatewayRecyclerViewAdapter = GatewayRecyclerViewAdapter(listOf() , ::onGatewayClick)
 
         val gridLayoutManager = GridLayoutManager(requireContext(), Constants.COLUMNS_GATEWAYS)
         binding.rcvGateways.layoutManager = gridLayoutManager
@@ -102,5 +105,8 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
             .load(Constants.FLAG_API_URL.format(customer.country.lowercase())).into(binding.imvCountry)
     }
 
-
+    private fun onGatewayClick(gateway: Gateway) {
+        val action = GatewaysFragmentDirections.actionNavigationGatewaysToDetailGatewayFragment(gateway.href)
+        findNavController().navigate(action)
+    }
 }
