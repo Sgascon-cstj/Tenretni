@@ -7,6 +7,7 @@ object Constants {
         private const val BASE_API = "https://api.andromia.science"
         const val TICKETS = "$BASE_API/tickets"
         const val CUSTOMERS = "$BASE_API/customers"
+        const val CUSTOMERS_GATEWAYS = "%s/gateways"
         const val GATEWAYS = "$BASE_API/gateways"
         const val NETWORK = "$BASE_API/network"
     }

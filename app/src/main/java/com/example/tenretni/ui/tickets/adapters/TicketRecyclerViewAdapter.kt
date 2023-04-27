@@ -12,7 +12,8 @@ import com.example.tenretni.core.DateHelper
 import com.example.tenretni.databinding.ItemTicketsBinding
 import com.example.tenretni.domain.models.Ticket
 
-class TicketRecyclerViewAdapter(var tickets: List<Ticket>)
+class TicketRecyclerViewAdapter(var tickets: List<Ticket>,
+                                private val onTicketClick: (Ticket) -> Unit)
     : RecyclerView.Adapter<TicketRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -28,6 +29,10 @@ class TicketRecyclerViewAdapter(var tickets: List<Ticket>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ticket = tickets[position]
         holder.bind(ticket)
+
+        holder.itemView.setOnClickListener {
+            onTicketClick(ticket)
+        }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
