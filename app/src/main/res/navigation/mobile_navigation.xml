@@ -12,14 +12,27 @@
         tools:layout="@layout/fragment_tickets" />
 
     <fragment
-        android:id="@+id/navigation_gateways"
+        android:id="@+id/gatewaysFragment"
         android:name="com.example.tenretni.ui.gateways.GatewaysFragment"
         android:label="@string/Gateways"
-        tools:layout="@layout/fragment_gateways" />
+        tools:layout="@layout/fragment_gateways" >
+        <action
+            android:id="@+id/action_navigation_gateways_to_detailGatewayFragment"
+            app:destination="@id/detailGatewayFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_networks"
         android:name="com.example.tenretni.ui.networks.NetworksFragment"
         android:label="@string/networks"
         tools:layout="@layout/fragment_networks" />
+    <fragment
+        android:id="@+id/detailGatewayFragment"
+        android:name="com.example.tenretni.ui.gateways.details.DetailGatewayFragment"
+        android:label="fragment_detail_gateway"
+        tools:layout="@layout/fragment_detail_gateway" >
+        <argument
+            android:name="hrefGateway"
+            app:argType="string" />
+    </fragment>
 </navigation>

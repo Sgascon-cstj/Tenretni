@@ -18,4 +18,7 @@
     <string name="apiErrorMessage">Error while retrieving the data from the server.</string>
     <string name="nanoSeconde" translatable="false">%d ns</string>
     <string name="ebps" translatable="false">%.3f Ebps</string>
+    <string name="btn_reboot">REBOOT</string>
+    <string name="kernel_revision">Kernel revision %s</string>
+    <string name="version" translatable="false">Version %s</string>
 </resources>
