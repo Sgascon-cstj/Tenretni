@@ -34,7 +34,7 @@ class TicketRepository {
             emit(ApiResult.Loading)
             try{
                 emit(ApiResult.Success(ticketDataSource.retrieveOne(href)))
-            } catch(ex: java.lang.Exception) {
+            } catch(ex: Exception) {
                 emit(ApiResult.Error(ex))
             }
         }.flowOn(Dispatchers.IO)
