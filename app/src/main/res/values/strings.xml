@@ -11,4 +11,9 @@
     <string name="loading_message">Loading %d/10 ...</string>
     <string name="concepteur"><![CDATA[Issam Abdelkrim & Samuel Gascon]]></string>
     <string name="tenretni_2023">Tenretni - 2023</string>
+    <string name="ticket_number_IT">Ticket %s</string>
+    <string name="date_itemTicket">%s</string>
+    <string name="priority_normal_IT">Normal</string>
+    <string name="status_open_IT">Open</string>
+    <string name="apiErrorMessage">Error while retrieving the data from the server.</string>
 </resources>
