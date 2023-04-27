@@ -15,4 +15,5 @@
     <string name="date_itemTicket">%s</string>
     <string name="priority_normal_IT">Normal</string>
     <string name="status_open_IT">Open</string>
+    <string name="apiErrorMessage">Error while retrieving the data from the server.</string>
 </resources>
