@@ -23,6 +23,9 @@ class DetailTicketViewModel(private val href: String): ViewModel() {
     val detailTicketUiState = _detailTicketUiState.asStateFlow()
 
     init {
+        loadInformation()
+    }
+    fun loadInformation(){
         viewModelScope.launch {
             ticketRepository.retrieveOne(href)?.collect { apiResult->
                 _detailTicketUiState.update {
@@ -38,7 +41,6 @@ class DetailTicketViewModel(private val href: String): ViewModel() {
             }
         }
     }
-
     fun retrieveGateways(ticket: Ticket){
         viewModelScope.launch {
             customerRepository.retrieveGateways(ticket.customer.href)?.collect{apiResult->

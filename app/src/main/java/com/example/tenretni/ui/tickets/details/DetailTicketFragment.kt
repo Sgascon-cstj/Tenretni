@@ -67,6 +67,12 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
 
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
+
+    override fun onResume() {
+        super.onResume()
+    viewModel.loadInformation()
+
+    }
     private fun startAnimationLoading(){
         binding.ticket.root.visibility = View.INVISIBLE
         binding.cardView.visibility = View.INVISIBLE

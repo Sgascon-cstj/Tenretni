@@ -108,6 +108,21 @@
                 tools:listitem="@layout/item_gateways"
                 tools:spanCount="2" />
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="88dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="27dp"
+                android:layout_marginBottom="132dp"
+                android:clickable="true"
+                android:src="@drawable/baseline_my_location_24"
+                app:layout_constraintBottom_toTopOf="@+id/rcvGateways"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txvName"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
