@@ -14,6 +14,11 @@ class LoadingViewModel : ViewModel() {
 
     private var _timerCounter = 0
 
+    init {
+        _loadingUiState.update {
+            LoadingUiState.Loading(_timerCounter)
+        }
+    }
     private val timer = object: CountDownTimer(10000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             _timerCounter++

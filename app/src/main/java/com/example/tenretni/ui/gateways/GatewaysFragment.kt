@@ -4,36 +4,51 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.viewbinding.library.fragment.viewBinding
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.tenretni.R
+import com.example.tenretni.core.Constants
 import com.example.tenretni.databinding.FragmentGatewaysBinding
+import com.example.tenretni.ui.gateways.adapter.GatewayRecyclerViewAdapter
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
-class GatewaysFragment : Fragment() {
+class GatewaysFragment : Fragment(R.layout.fragment_gateways) {
 
-    private var _binding: FragmentGatewaysBinding? = null
+    private val binding : FragmentGatewaysBinding by viewBinding()
+    private val viewModel: GatewaysViewModel by viewModels()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var gatewayRecyclerViewAdapter: GatewayRecyclerViewAdapter
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val gatewaysViewModel =
-            ViewModelProvider(this).get(GatewaysViewModel::class.java)
+        gatewayRecyclerViewAdapter = GatewayRecyclerViewAdapter()
 
-        _binding = FragmentGatewaysBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val gridLayoutManager = GridLayoutManager(requireContext(), Constants.COLUMNS_GATEWAYS)
+        binding.rcvGateways.layoutManager = gridLayoutManager
+        binding.rcvGateways.adapter = gatewayRecyclerViewAdapter
 
 
-        return root
-    }
+        //TODO: Ajouter le loading
+        //TODO: Ajouter le message d'erreur
+        viewModel.gatewaysUiState.onEach {
+            when(it){
+                GatewaysUiState.Empty -> Unit
+                is GatewaysUiState.Error -> Toast.makeText(requireContext(),it.ex.toString(),Toast.LENGTH_LONG).show()
+                GatewaysUiState.Loading -> Unit
+                is GatewaysUiState.Success -> {
+                    binding.rcvGateways.visibility = View.VISIBLE
+                    gatewayRecyclerViewAdapter.gateways = it.gateways
+                    gatewayRecyclerViewAdapter.notifyDataSetChanged()
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+                }
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 }
