@@ -18,4 +18,5 @@
         tools:listitem="@layout/item_gateways"
         tools:itemCount="2"
         tools:spanCount="2" />
+    <androidx.core.widget.ContentLoadingProgressBar android:id="@+id/pgbLoading" android:layout_width="match_parent" android:layout_height="match_parent" style="?android:attr/progressBarStyleLarge" android:indeterminateTint="@android:color/black" />
 </androidx.constraintlayout.widget.ConstraintLayout>

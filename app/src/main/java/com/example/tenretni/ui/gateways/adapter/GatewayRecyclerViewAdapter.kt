@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tenretni.R
 import com.example.tenretni.databinding.ItemGatewaysBinding
 import com.example.tenretni.domain.models.Gateway
+import kotlin.math.round
 
 class GatewayRecyclerViewAdapter(var gateways : List<Gateway> = listOf()) : RecyclerView.Adapter<GatewayRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
@@ -30,9 +31,9 @@ class GatewayRecyclerViewAdapter(var gateways : List<Gateway> = listOf()) : Recy
 
         fun bind(gateway: Gateway) {
             if (gateway.connection.status == "Online"){
-                binding.ping.text = gateway.connection.ping.toString()
-                binding.download.text = gateway.connection.download.toString()
-                binding.upload.text = gateway.connection.upload.toString()
+                binding.ping.text = binding.root.context.getString(R.string.nanoSeconde,gateway.connection.ping)
+                binding.download.text = binding.root.context.getString(R.string.ebps, gateway.connection.download)
+                binding.upload.text = binding.root.context.getString(R.string.ebps,gateway.connection.upload)
                 binding.numeroSerie.text = gateway.serialNumber
             }else{
                 binding.online.visibility = View.INVISIBLE
