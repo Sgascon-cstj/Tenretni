@@ -52,6 +52,7 @@ class TicketsFragment : Fragment(R.layout.fragment_tickets) {
                     ticketRecyclerViewAdapter.notifyDataSetChanged()
 
                     binding.pgbLoading.hide()
+
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
