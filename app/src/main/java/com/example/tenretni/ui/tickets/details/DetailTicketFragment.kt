@@ -24,6 +24,8 @@ import com.example.tenretni.domain.models.Gateway
 import com.example.tenretni.domain.models.Ticket
 import com.example.tenretni.ui.gateways.GatewaysFragmentDirections
 import com.example.tenretni.ui.gateways.adapter.GatewayRecyclerViewAdapter
+import io.github.g00fy2.quickie.QRResult
+import io.github.g00fy2.quickie.ScanQRCode
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -33,6 +35,8 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
 
     private lateinit var gatewayRecyclerViewAdapter: GatewayRecyclerViewAdapter
 
+    //QR code
+    private val scanQRCode = registerForActivityResult(ScanQRCode(),::handleQuickieResult)
 
     private val binding: FragmentDetailTicketBinding by viewBinding()
     private val viewModel: DetailTicketViewModel by viewModels {
@@ -41,6 +45,10 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //QR
+        binding.btnInstall.setOnClickListener{
+            scanQRCode.launch(null)
+        }
 
         gatewayRecyclerViewAdapter = GatewayRecyclerViewAdapter(listOf() , ::onGatewayClick)
 
@@ -70,7 +78,18 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
 
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
+    private fun handleQuickieResult(qrResult: QRResult) {
 
+        when(qrResult) {
+            is QRResult.QRSuccess -> {
+                Toast.makeText(requireContext(),"Ok",Toast.LENGTH_SHORT).show()
+                viewModel.addGateway(qrResult.content.rawValue)
+            }
+            QRResult.QRUserCanceled ->Toast.makeText(requireContext(),  getString(R.string.user_canceled),Toast.LENGTH_SHORT).show()
+            QRResult.QRMissingPermission -> Toast.makeText(requireContext(),  getString(R.string.missing_permission),Toast.LENGTH_SHORT).show()
+            is QRResult.QRError -> Toast.makeText(requireContext(), qrResult.exception.localizedMessage,Toast.LENGTH_SHORT).show()
+        }
+    }
     override fun onResume() {
         super.onResume()
     viewModel.loadInformation()
