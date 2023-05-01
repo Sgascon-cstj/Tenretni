@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.tenretni.core.ApiResult
 import com.example.tenretni.data.repositories.CustomerRepository
+import com.example.tenretni.data.repositories.GatewaysRepository
 import com.example.tenretni.data.repositories.TicketRepository
+import com.example.tenretni.domain.models.Customer
+import com.example.tenretni.domain.models.Gateway
 import com.example.tenretni.domain.models.Ticket
 import com.example.tenretni.ui.tickets.TicketUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,12 +21,21 @@ class DetailTicketViewModel(private val href: String): ViewModel() {
 
     private val ticketRepository = TicketRepository()
     private val customerRepository = CustomerRepository()
+    private var customer = Customer()
 
     private val _detailTicketUiState = MutableStateFlow<DetailTicketUiState>(DetailTicketUiState.Empty)
     val detailTicketUiState = _detailTicketUiState.asStateFlow()
 
     init {
         loadInformation()
+    }
+    fun addGateway(rawValue: String){
+        viewModelScope.launch {
+            customerRepository.create(rawValue,customer.href).collect{
+
+            }
+            loadInformation()
+        }
     }
     fun loadInformation(){
         viewModelScope.launch {
@@ -33,6 +45,7 @@ class DetailTicketViewModel(private val href: String): ViewModel() {
                         is ApiResult.Error -> DetailTicketUiState.Error(apiResult.exception)
                         ApiResult.Loading -> DetailTicketUiState.Loading
                         is ApiResult.Success -> {
+                            customer = apiResult.data.customer
                             retrieveGateways(apiResult.data)
                             DetailTicketUiState.TicketSuccess(apiResult.data)
                         }
