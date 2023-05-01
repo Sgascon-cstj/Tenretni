@@ -7,7 +7,7 @@
         android:title="@string/tickets" />
 
     <item
-        android:id="@+id/navigation_gateways"
+        android:id="@+id/gatewaysFragment"
         android:icon="@drawable/gateway"
         android:title="@string/Gateways" />
 

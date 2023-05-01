@@ -39,7 +39,7 @@ class TicketsFragment : Fragment(R.layout.fragment_tickets) {
             when(it) {
                 TicketUiState.Empty -> Unit
                 is TicketUiState.Error -> {
-                    Toast.makeText(requireContext(), it.exception?.localizedMessage ?: getString(R.string.apiErrorMessage), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.apiErrorMessage), Toast.LENGTH_SHORT).show()
                     requireActivity().supportFragmentManager.popBackStack()
                 }
                 TicketUiState.Loading -> {

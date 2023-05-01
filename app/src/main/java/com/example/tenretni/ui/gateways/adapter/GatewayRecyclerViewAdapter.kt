@@ -9,7 +9,9 @@ import com.example.tenretni.databinding.ItemGatewaysBinding
 import com.example.tenretni.domain.models.Gateway
 import kotlin.math.round
 
-class GatewayRecyclerViewAdapter(var gateways : List<Gateway> = listOf()) : RecyclerView.Adapter<GatewayRecyclerViewAdapter.ViewHolder>() {
+class GatewayRecyclerViewAdapter(var gateways : List<Gateway>,
+                                 private val onGatewayClick: (Gateway) -> Unit)
+    : RecyclerView.Adapter<GatewayRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -22,6 +24,10 @@ class GatewayRecyclerViewAdapter(var gateways : List<Gateway> = listOf()) : Recy
     override fun onBindViewHolder(holder: GatewayRecyclerViewAdapter.ViewHolder, position: Int) {
         val gateway = gateways[position]
         holder.bind(gateway)
+
+        holder.itemView.setOnClickListener {
+            onGatewayClick(gateway)
+        }
     }
 
 
@@ -31,10 +37,10 @@ class GatewayRecyclerViewAdapter(var gateways : List<Gateway> = listOf()) : Recy
 
         fun bind(gateway: Gateway) {
             if (gateway.connection.status == "Online"){
-                binding.ping.text = binding.root.context.getString(R.string.nanoSeconde,gateway.connection.ping)
-                binding.download.text = binding.root.context.getString(R.string.ebps, gateway.connection.download)
-                binding.upload.text = binding.root.context.getString(R.string.ebps,gateway.connection.upload)
-                binding.numeroSerie.text = gateway.serialNumber
+                binding.txvPing.text = binding.root.context.getString(R.string.nanoSeconde,gateway.connection.ping)
+                binding.txvDownload.text = binding.root.context.getString(R.string.ebps, gateway.connection.download)
+                binding.txvUpload.text = binding.root.context.getString(R.string.ebps,gateway.connection.upload)
+                binding.txvNumeroSerie.text = gateway.serialNumber
             }else{
                 binding.online.visibility = View.INVISIBLE
                 binding.offline.visibility = View.VISIBLE

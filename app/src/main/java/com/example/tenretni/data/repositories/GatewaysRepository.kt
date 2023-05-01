@@ -31,4 +31,24 @@ class GatewaysRepository {
 
         }.flowOn(Dispatchers.IO)
     }
+
+    fun retrieveOne(hrefGateway: String) : Flow<ApiResult<Gateway>>? {
+        return flow {
+            while(true) {
+
+                emit(ApiResult.Loading)
+                try {
+
+                    emit(ApiResult.Success(gatewaysDataSource.retrieveOne(hrefGateway)))
+                }catch (ex: Exception){
+                    emit(ApiResult.Error(ex))
+                }
+
+                // TODO: A verif le delai
+                delay(Constants.RefreshDelay.GATEWAY_LIST)
+            }
+
+        }.flowOn(Dispatchers.IO)
+    }
+
 }
