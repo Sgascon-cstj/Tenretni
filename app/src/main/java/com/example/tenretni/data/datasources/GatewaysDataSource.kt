@@ -18,4 +18,13 @@ class GatewaysDataSource : JsonDataSource() {
             is Result.Failure -> throw result.error.exception
         }
     }
+
+    fun retrieveOne(hrefGateway: String) : Gateway{
+        val (_, _, result)  = hrefGateway.httpGet().responseJson()
+
+        return when (result) {
+            is Result.Success -> json.decodeFromString(result.value.content)
+            is Result.Failure -> throw result.error.exception
+        }
+    }
 }
