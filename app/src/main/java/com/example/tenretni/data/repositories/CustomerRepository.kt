@@ -24,4 +24,13 @@ class CustomerRepository {
             }
         }.flowOn(Dispatchers.IO)
     }
+    fun create(rawValue: String, href: String) : Flow<ApiResult<Gateway>> {
+        return flow {
+            try {
+                emit(ApiResult.Success(customerDataSource.create(rawValue,href)))
+            } catch (ex: java.lang.Exception) {
+                emit(ApiResult.Error(ex))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 }
