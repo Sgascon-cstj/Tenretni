@@ -25,4 +25,6 @@
     <string name="install">INSTALL</string>
     <string name="title_fragmentDetail">Ticket %s</string>
     <string name="first_name_and_last_name" translatable="false">%s %s</string>
+    <string name="user_canceled">User Canceled</string>
+    <string name="missing_permission">Missing Permission</string>
 </resources>
