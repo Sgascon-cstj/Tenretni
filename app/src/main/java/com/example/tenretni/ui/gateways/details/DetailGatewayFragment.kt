@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.tenretni.R
 import com.example.tenretni.core.ColorHelper
+import com.example.tenretni.core.loadFromResource
 import com.example.tenretni.databinding.FragmentDetailGatewayBinding
 import com.example.tenretni.domain.models.Gateway
 import kotlinx.coroutines.flow.launchIn
@@ -79,7 +80,7 @@ class DetailGatewayFragment : Fragment(R.layout.fragment_detail_gateway) {
             binding.txvPingDetails.text = binding.root.context.getString(R.string.nanoSeconde,gateway.connection.ping)
             binding.txvDownloadDetails.text = binding.root.context.getString(R.string.ebps, gateway.connection.download)
             binding.txvUploadDetails.text = binding.root.context.getString(R.string.ebps,gateway.connection.upload)
-            binding.txvSignalDetails.text = gateway.connection.signal.toString()
+            binding.txvSignalDetails.text = gateway.connection.signal.toString()+"dBM"
             //signalColor(gateway.connection.signal)
             binding.txvNA.visibility = View.GONE
         }else{
@@ -93,11 +94,12 @@ class DetailGatewayFragment : Fragment(R.layout.fragment_detail_gateway) {
         // Section du bas de la page
         binding.txvHashBorneDetails.text = gateway.hash
 
-        // Boucler sur tous les images
-        for(img in gateway.config.kernel)
-        {
-            imgInsert(img)
-        }
+        // Section img
+        binding.imvKernelDetails1.loadFromResource(binding.root.context, "element_"+gateway.config.kernel[0].lowercase())
+        binding.imvKernelDetails2.loadFromResource(binding.root.context, "element_"+gateway.config.kernel[1].lowercase())
+        binding.imvKernelDetails3.loadFromResource(binding.root.context, "element_"+gateway.config.kernel[2].lowercase())
+        binding.imvKernelDetails4.loadFromResource(binding.root.context, "element_"+gateway.config.kernel[3].lowercase())
+        binding.imvKernelDetails5.loadFromResource(binding.root.context, "element_"+gateway.config.kernel[4].lowercase())
 
         binding.txvKernelRevisionDetails.text = getString(R.string.kernel_revision, gateway.config.kernelRevision.toString())
         binding.txvVersionDetails.text = getString(R.string.version, gateway.config.version)
@@ -109,12 +111,6 @@ class DetailGatewayFragment : Fragment(R.layout.fragment_detail_gateway) {
     {
         // A coder plus tard
         //ColorHelper.
-    }
-
-    private fun imgInsert(img: String) {
-        Glide.with(this)
-            .load(img)
-            .into(binding.imvKernelDetails1)
     }
 
 }
