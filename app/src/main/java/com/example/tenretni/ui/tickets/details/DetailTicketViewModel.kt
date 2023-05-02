@@ -23,7 +23,7 @@ class DetailTicketViewModel(private val href: String): ViewModel() {
     private val customerRepository = CustomerRepository()
     private var customer = Customer()
 
-    private val _detailTicketUiState = MutableStateFlow<DetailTicketUiState>(DetailTicketUiState.Empty)
+    private val _detailTicketUiState = MutableStateFlow<DetailTicketUiState>(DetailTicketUiState.Loading)
     val detailTicketUiState = _detailTicketUiState.asStateFlow()
 
     init {
@@ -35,6 +35,32 @@ class DetailTicketViewModel(private val href: String): ViewModel() {
 
             }
             loadInformation()
+        }
+    }
+    fun solve(){
+        viewModelScope.launch {
+            ticketRepository.action(href,"solve").collect{apiResult->
+                _detailTicketUiState.update {
+                    when(apiResult){
+                        is ApiResult.Error -> DetailTicketUiState.Error(apiResult.exception)
+                        ApiResult.Loading -> DetailTicketUiState.Loading
+                        is ApiResult.Success -> DetailTicketUiState.Solve
+                    }
+                }
+            }
+        }
+    }
+    fun open(){
+        viewModelScope.launch {
+            ticketRepository.action(href,"open").collect{apiResult->
+                _detailTicketUiState.update {
+                    when(apiResult){
+                        is ApiResult.Error -> DetailTicketUiState.Error(apiResult.exception)
+                        ApiResult.Loading -> DetailTicketUiState.Loading
+                        is ApiResult.Success -> DetailTicketUiState.Open
+                    }
+                }
+            }
         }
     }
     fun loadInformation(){

@@ -44,4 +44,17 @@ class TicketRepository {
         }
         }.flowOn(Dispatchers.IO)
     }
+
+    fun action(href: String, action:String): Flow<ApiResult<Ticket>> {
+        return flow {
+            emit(ApiResult.Loading)
+            try {
+                emit(ApiResult.Success(ticketDataSource.actions(href,action)))
+            }catch (ex: Exception){
+                emit(ApiResult.Error(ex))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+
 }
