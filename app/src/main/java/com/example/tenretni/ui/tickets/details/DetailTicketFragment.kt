@@ -34,7 +34,8 @@ import kotlinx.coroutines.flow.onEach
 class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
     private val args : DetailTicketFragmentArgs by navArgs()
 
-    private lateinit var gatewayRecyclerViewAdapter: GatewayRecyclerViewAdapter
+
+    private val gatewayRecyclerViewAdapter = GatewayRecyclerViewAdapter(listOf(), ::onGatewayClick)
 
     //QR code
     private val scanQRCode = registerForActivityResult(ScanQRCode(),::handleQuickieResult)
@@ -71,7 +72,6 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
             viewModel.open()
         }
 
-        gatewayRecyclerViewAdapter = GatewayRecyclerViewAdapter(listOf() , ::onGatewayClick)
 
         val gridLayoutManager = GridLayoutManager(requireContext(), Constants.COLUMNS_GATEWAYS)
         binding.rcvGateways.layoutManager = gridLayoutManager
@@ -169,7 +169,7 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
     }
 
     private fun onGatewayClick(gateway: Gateway) {
-        val action = GatewaysFragmentDirections.actionNavigationGatewaysToDetailGatewayFragment(gateway.href)
+        val action = DetailTicketFragmentDirections.actionDetailTicketFragmentToDetailGatewayFragment(gateway.href)
         findNavController().navigate(action)
     }
 }

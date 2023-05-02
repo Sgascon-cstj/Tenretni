@@ -104,6 +104,7 @@ class DetailGatewayFragment : Fragment(R.layout.fragment_detail_gateway) {
                 txvDownloadDetails.visibility = View.VISIBLE
                 txvUploadDetails.visibility = View.VISIBLE
                 txvSignalDetails.visibility = View.VISIBLE
+                btnUpdateDetails.visibility = View.VISIBLE
                 btnRebootDetails.visibility = View.VISIBLE
             }
         }else{
@@ -116,6 +117,7 @@ class DetailGatewayFragment : Fragment(R.layout.fragment_detail_gateway) {
                 txvDownloadDetails.visibility = View.GONE
                 txvUploadDetails.visibility = View.GONE
                 txvSignalDetails.visibility = View.GONE
+                btnUpdateDetails.visibility = View.GONE
                 btnRebootDetails.visibility = View.GONE
             }
 

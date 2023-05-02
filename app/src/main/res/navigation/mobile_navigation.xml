@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_detailTicketFragment_to_mapsActivity"
             app:destination="@id/mapsActivity" />
+        <action
+            android:id="@+id/action_detailTicketFragment_to_detailGatewayFragment"
+            app:destination="@id/detailGatewayFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailGatewayFragment"
