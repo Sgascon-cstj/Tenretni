@@ -19,6 +19,10 @@ class DetailGatewayViewModel(private val hrefGateway:String) : ViewModel() {
     val detailGatewayUiState = _detailGatewayUiState.asStateFlow()
 
     init {
+        loadInformation()
+    }
+
+    fun loadInformation(){
         viewModelScope.launch {
             gatewayRepository.retrieveOne(hrefGateway)?.collect { apiResult ->
                 _detailGatewayUiState.update { _ ->
@@ -29,6 +33,24 @@ class DetailGatewayViewModel(private val hrefGateway:String) : ViewModel() {
                     }
                 }
             }
+        }
+    }
+
+    fun updateGateway(href: String){
+        viewModelScope.launch {
+            gatewayRepository.update(href).collect{
+
+            }
+            loadInformation()
+        }
+    }
+
+    fun rebootGateway(href: String){
+        viewModelScope.launch {
+            gatewayRepository.reboot(href).collect{
+
+            }
+            loadInformation()
         }
     }
 
