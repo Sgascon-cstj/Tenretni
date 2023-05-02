@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
@@ -45,6 +46,7 @@ class DetailGatewayFragment : Fragment(R.layout.fragment_detail_gateway) {
                     requireActivity().supportFragmentManager.popBackStack()
                 }
                 is DetailGatewayUiState.Success -> {
+                    (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.gateway_number_title, it.gateway.serialNumber)
                     hideAnimationLoading()
                     displayGateway(it.gateway)
 
