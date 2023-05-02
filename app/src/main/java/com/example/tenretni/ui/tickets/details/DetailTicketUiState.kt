@@ -10,4 +10,6 @@ sealed class DetailTicketUiState {
     class Error(val e: Exception) : DetailTicketUiState()
     class TicketSuccess(val ticket: Ticket) : DetailTicketUiState()
     class GatewaysSuccess(val gateways: List<Gateway>) : DetailTicketUiState()
+    object Solve:DetailTicketUiState()
+    object Open:DetailTicketUiState()
 }
