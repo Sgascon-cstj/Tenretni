@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.viewbinding.library.fragment.viewBinding
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -34,7 +35,8 @@ import kotlinx.coroutines.flow.onEach
 class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
     private val args : DetailTicketFragmentArgs by navArgs()
 
-    private lateinit var gatewayRecyclerViewAdapter: GatewayRecyclerViewAdapter
+
+    private val gatewayRecyclerViewAdapter = GatewayRecyclerViewAdapter(listOf(), ::onGatewayClick)
 
     //QR code
     private val scanQRCode = registerForActivityResult(ScanQRCode(),::handleQuickieResult)
@@ -71,7 +73,6 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
             viewModel.open()
         }
 
-        gatewayRecyclerViewAdapter = GatewayRecyclerViewAdapter(listOf() , ::onGatewayClick)
 
         val gridLayoutManager = GridLayoutManager(requireContext(), Constants.COLUMNS_GATEWAYS)
         binding.rcvGateways.layoutManager = gridLayoutManager
@@ -89,8 +90,7 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
                 is DetailTicketUiState.Error -> Toast.makeText(requireContext(),getString(R.string.apiErrorMessage), Toast.LENGTH_SHORT).show()
                 is DetailTicketUiState.TicketSuccess -> {
 
-                    (requireActivity() as MainActivity).title =
-                        getString(R.string.title_fragmentDetail,it.ticket.ticketNumber)
+                    (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.title_fragmentDetail, it.ticket.ticketNumber)
                     hideAimationLoading()
                     displayTicket(it.ticket)
                     displayCustomer(it.ticket.customer)
@@ -169,7 +169,7 @@ class DetailTicketFragment : Fragment(R.layout.fragment_detail_ticket) {
     }
 
     private fun onGatewayClick(gateway: Gateway) {
-        val action = GatewaysFragmentDirections.actionNavigationGatewaysToDetailGatewayFragment(gateway.href)
+        val action = DetailTicketFragmentDirections.actionDetailTicketFragmentToDetailGatewayFragment(gateway.href)
         findNavController().navigate(action)
     }
 }

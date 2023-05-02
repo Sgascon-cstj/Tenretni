@@ -3,6 +3,7 @@ package com.example.tenretni.ui.loading
 import android.content.IntentSender.OnFinished
 import android.os.CountDownTimer
 import androidx.lifecycle.ViewModel
+import com.example.tenretni.core.Constants
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -19,7 +20,7 @@ class LoadingViewModel : ViewModel() {
             LoadingUiState.Loading(_timerCounter)
         }
     }
-    private val timer = object: CountDownTimer(1000, 1000) {
+    private val timer = object: CountDownTimer(Constants.LOADING_DELAY_MS, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             _timerCounter++
             _loadingUiState.update {

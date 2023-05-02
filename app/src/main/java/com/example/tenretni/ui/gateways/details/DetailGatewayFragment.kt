@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
@@ -25,6 +26,8 @@ class DetailGatewayFragment : Fragment(R.layout.fragment_detail_gateway) {
 
     private val args:DetailGatewayFragmentArgs by navArgs()
 
+    private var href : String = ""
+
     private val viewModel:DetailGatewayViewModel by viewModels {
         DetailGatewayViewModel.Factory(args.hrefGateway)
     }
@@ -43,8 +46,19 @@ class DetailGatewayFragment : Fragment(R.layout.fragment_detail_gateway) {
                     requireActivity().supportFragmentManager.popBackStack()
                 }
                 is DetailGatewayUiState.Success -> {
+                    (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.gateway_number_title, it.gateway.serialNumber)
                     hideAnimationLoading()
                     displayGateway(it.gateway)
+
+                    href = it.gateway.href
+
+                    binding.btnRebootDetails.setOnClickListener{
+                        viewModel.rebootGateway(href)
+                    }
+
+                    binding.btnUpdateDetails.setOnClickListener{
+                        viewModel.updateGateway(href)
+                    }
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -53,8 +67,8 @@ class DetailGatewayFragment : Fragment(R.layout.fragment_detail_gateway) {
     private fun startAnimationLoading(){
         binding.cardView.visibility = View.GONE
         // TODO: Verifier si les btn sont encore visible apres le retrait de la card
-        binding.btnRebootDetails.visibility = View.GONE
-        binding.btnUpdateDetails.visibility = View.GONE
+//        binding.btnRebootDetails.visibility = View.GONE
+//        binding.btnUpdateDetails.visibility = View.GONE
         binding.pgbLoading.show()
     }
 
@@ -62,8 +76,8 @@ class DetailGatewayFragment : Fragment(R.layout.fragment_detail_gateway) {
         binding.pgbLoading.hide()
         binding.cardView.visibility = View.VISIBLE
         // TODO: Verifier si les btn sont encore visible apres le retrait de la card
-        binding.btnRebootDetails.visibility = View.VISIBLE
-        binding.btnUpdateDetails.visibility = View.VISIBLE
+//        binding.btnRebootDetails.visibility = View.VISIBLE
+//        binding.btnUpdateDetails.visibility = View.VISIBLE
     }
 
     private fun displayGateway(gateway: Gateway) {
@@ -76,19 +90,39 @@ class DetailGatewayFragment : Fragment(R.layout.fragment_detail_gateway) {
 
         // Section de la card ONLINE/OFFLINE
         if (gateway.connection.status == "Online"){
-            binding.txvAdresseIPDetails.text = gateway.connection.ip
-            binding.txvPingDetails.text = binding.root.context.getString(R.string.nanoSeconde,gateway.connection.ping)
-            binding.txvDownloadDetails.text = binding.root.context.getString(R.string.ebps, gateway.connection.download)
-            binding.txvUploadDetails.text = binding.root.context.getString(R.string.ebps,gateway.connection.upload)
-            binding.txvSignalDetails.text = gateway.connection.signal.toString()+"dBM"
-            //signalColor(gateway.connection.signal)
-            binding.txvNA.visibility = View.GONE
+            with(binding)
+            {
+                chipVisible.text = gateway.connection.status
+                chipVisible.chipBackgroundColor = ColorHelper.connectionStatusColor(root.context, gateway.connection.status)
+                txvAdresseIPDetails.text = gateway.connection.ip
+                txvPingDetails.text = binding.root.context.getString(R.string.nanoSeconde,gateway.connection.ping)
+                txvDownloadDetails.text = binding.root.context.getString(R.string.ebps, gateway.connection.download)
+                txvUploadDetails.text = binding.root.context.getString(R.string.ebps,gateway.connection.upload)
+                txvSignalDetails.text = binding.root.context.getString(R.string.dBm, gateway.connection.signal)
+                //signalColor(gateway.connection.signal)
+                txvNA.visibility = View.GONE
+                txvAdresseIPDetails.visibility = View.VISIBLE
+                txvPingDetails.visibility = View.VISIBLE
+                txvDownloadDetails.visibility = View.VISIBLE
+                txvUploadDetails.visibility = View.VISIBLE
+                txvSignalDetails.visibility = View.VISIBLE
+                btnUpdateDetails.visibility = View.VISIBLE
+                btnRebootDetails.visibility = View.VISIBLE
+            }
         }else{
-            binding.txvNA.visibility = View.VISIBLE
-            binding.txvPingDetails.visibility = View.GONE
-            binding.txvDownloadDetails.visibility = View.GONE
-            binding.txvUploadDetails.visibility = View.GONE
-            binding.txvSignalDetails.visibility = View.GONE
+            with(binding){
+                chipVisible.text = gateway.connection.status
+                chipVisible.chipBackgroundColor = ColorHelper.connectionStatusColor(root.context, gateway.connection.status)
+                txvNA.visibility = View.VISIBLE
+                txvAdresseIPDetails.visibility = View.GONE
+                txvPingDetails.visibility = View.GONE
+                txvDownloadDetails.visibility = View.GONE
+                txvUploadDetails.visibility = View.GONE
+                txvSignalDetails.visibility = View.GONE
+                btnUpdateDetails.visibility = View.GONE
+                btnRebootDetails.visibility = View.GONE
+            }
+
         }
 
         // Section du bas de la page

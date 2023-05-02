@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Tenretni</string>
+    <string name="title_home">Accueil</string>
+    <string name="title_dashboard">Tableau de bord</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="tickets">Billets</string>
+    <string name="Gateways">Bornes</string>
+    <string name="networks">Réseaux</string>
+    <string name="online">En Ligne</string>
     <string name="loading_message">Chargement %d/10 ...</string>
     <string name="concepteur"><![CDATA[Issam Abdelkrim & Samuel Gascon]]></string>
     <string name="tenretni_2023">Tenretni - 2023</string>
@@ -9,6 +16,14 @@
     <string name="status_open_IT">Ouvert</string>
     <string name="ticket_number_IT">Billet %s</string>
     <string name="apiErrorMessage">Erreur lors de la récupération des données à partir du serveur.</string>
+    <string name="gateway">Réseaux</string>
     <string name="btn_reboot">REDÉMARRER</string>
     <string name="kernel_revision">Revision kernel %s</string>
+    <string name="solve">RÉSOLU</string>
+    <string name="install">INSTALLER</string>
+    <string name="title_fragmentDetail">Billet %s</string>
+    <string name="user_canceled">Annulation de l\'utilisateur</string>
+    <string name="missing_permission">Permissions manquante</string>
+    <string name="BtnOpen">OUVERT</string>
+    <string name="gateway_number_title">Borne %s</string>
 </resources>

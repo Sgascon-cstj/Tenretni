@@ -151,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="494dp" />
+                app:layout_constraintGuide_begin="478dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline4"
@@ -219,65 +219,64 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="640dp" />
+                app:layout_constraintGuide_begin="598dp" />
 
             <ImageView
                 android:id="@+id/imvKernelDetails1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="3dp"
                 android:src="@drawable/element_b"
-                app:layout_constraintBottom_toBottomOf="@+id/imvKernelDetails3"
-                app:layout_constraintEnd_toStartOf="@+id/imvKernelDetails2"
+                app:layout_constraintEnd_toStartOf="@+id/imvKernelDetails3"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imvKernelDetails3" />
+                app:layout_constraintTop_toTopOf="@+id/imvKernelDetails4" />
 
             <ImageView
                 android:id="@+id/imvKernelDetails2"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="3dp"
                 android:src="@drawable/element_g"
-                app:layout_constraintBottom_toBottomOf="@+id/imvKernelDetails3"
-                app:layout_constraintEnd_toStartOf="@+id/imvKernelDetails3"
+                app:layout_constraintEnd_toStartOf="@+id/imvKernelDetails5"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imvKernelDetails1"
-                app:layout_constraintTop_toTopOf="@+id/imvKernelDetails3" />
+                app:layout_constraintStart_toEndOf="@+id/imvKernelDetails4"
+                app:layout_constraintTop_toTopOf="@+id/imvKernelDetails4" />
 
             <ImageView
                 android:id="@+id/imvKernelDetails3"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="3dp"
                 android:src="@drawable/element_q"
-                app:layout_constraintEnd_toEndOf="@+id/txvHashBorneDetails"
                 app:layout_constraintEnd_toStartOf="@+id/imvKernelDetails4"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toEndOf="@+id/imvKernelDetails2"
-                app:layout_constraintStart_toStartOf="@+id/txvHashBorneDetails"
-                app:layout_constraintTop_toBottomOf="@+id/txvHashBorneDetails" />
+                app:layout_constraintStart_toEndOf="@+id/imvKernelDetails1"
+                app:layout_constraintTop_toTopOf="@+id/imvKernelDetails4" />
 
             <ImageView
                 android:id="@+id/imvKernelDetails4"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="6dp"
                 android:src="@drawable/element_e"
-                app:layout_constraintBottom_toBottomOf="@+id/imvKernelDetails3"
-                app:layout_constraintEnd_toStartOf="@+id/imvKernelDetails5"
+                app:layout_constraintBottom_toTopOf="@+id/txvKernelRevisionDetails"
+                app:layout_constraintEnd_toStartOf="@+id/imvKernelDetails2"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/imvKernelDetails3"
-                app:layout_constraintTop_toTopOf="@+id/imvKernelDetails3" />
+                app:layout_constraintTop_toTopOf="@+id/txvHashBorneDetails" />
 
             <ImageView
                 android:id="@+id/imvKernelDetails5"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="3dp"
                 android:src="@drawable/element_q"
-                app:layout_constraintBottom_toBottomOf="@+id/imvKernelDetails3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imvKernelDetails4"
-                app:layout_constraintTop_toTopOf="@+id/imvKernelDetails3" />
+                app:layout_constraintStart_toEndOf="@+id/imvKernelDetails2"
+                app:layout_constraintTop_toTopOf="@+id/imvKernelDetails4" />
 
             <TextView
                 android:id="@+id/txvKernelRevisionDetails"
@@ -303,7 +302,7 @@
                 app:layout_constraintStart_toEndOf="@+id/txvKernelRevisionDetails"
                 app:layout_constraintTop_toTopOf="@+id/txvKernelRevisionDetails" />
 
-            <Button
+                <Button
                 android:id="@+id/btnUpdateDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -321,7 +320,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="61dp"
                 android:text="@string/btn_reboot"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
